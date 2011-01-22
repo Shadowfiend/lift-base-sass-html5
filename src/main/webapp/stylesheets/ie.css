@@ -1,5 +1,25 @@
-/* Welcome to Susy. Use this file to write IE specific override styles.
- * Import this file using the following HTML or equivalent:
- * <!--[if IE]>
- *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
- * <![endif]--> */
+/* line 16, ../sass-hidden/ie.sass */
+.ie6 legend, .ie7 legend {
+  margin-left: -7px;
+}
+
+/* line 21, ../sass-hidden/ie.sass */
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+/* line 23, ../sass-hidden/ie.sass */
+.ie6 input {
+  vertical-align: text-bottom;
+}
+
+/* line 28, ../sass-hidden/ie.sass */
+button {
+  width: auto;
+  overflow: visible;
+}
+
+/* line 34, ../sass-hidden/ie.sass */
+.ie7 img {
+  -ms-interpolation-mode: bicubic;
+}

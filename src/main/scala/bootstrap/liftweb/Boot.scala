@@ -15,6 +15,8 @@ import net.liftweb._
     import js.jquery.JQuery14Artifacts
   import mongodb._
 
+import base.snippet.Util
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -45,6 +47,9 @@ class Boot {
     // each page, just comment this line out.
     LiftRules.setSiteMap(SiteMap(entries:_*))
 
+    // Set up additional snippet handlers for helper snippets (e.g., mode).
+    LiftRules.snippets.append(Util.snippetHandlers)
+
     // Attaches a resource id for <lift:with-resource-id> that is the
     // timestamp of the last modified date for the given resource; if the
     // resource can't be found, fall back on the per-server-instance id
@@ -67,5 +72,8 @@ class Boot {
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
+    // Use HTML5 for rendering
+    LiftRules.htmlProperties.default.set((r: Req) =>
+      new Html5Properties(r.userAgent))
   }
 }

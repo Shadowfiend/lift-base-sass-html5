@@ -2,9 +2,38 @@ package base.snippet
   
 import scala.xml._
 
-import net.liftweb.http._
+import net.liftweb._
+  import common._
+  import http._
+    import LiftRules._
 
-class Util {
+object Util {
+  def snippetHandlers : SnippetPF = {
+    case List("mode") => mode _
+    case List("ieConditionalComment") => ieConditionalComment _
+    case List("ieconditionalcomment") => ieConditionalComment _
+  }
+
+  def mode(xhtml:NodeSeq) = {
+    val result =
+      for {
+        targetMode <- S.attr("is") ?~ "is attribute for target mode was not specified"
+        mode <- Box.legacyNullTest(System.getProperty("run.mode")) ?~ "target mode not found"
+      } yield {
+        if (targetMode == mode) {
+          xhtml
+        } else {
+          NodeSeq.Empty
+        }
+      }
+
+    result match {
+      case Full(data) => data
+      case Empty => NodeSeq.Empty
+      case Failure(message, _, _) => <div class="error">{message}</div>
+    }
+  }
+
   /**
    * Insert a conditional comment. Ensures that the comment (a) doesn't get
    * stripped in production mode and (b) can contain XML that is pre-processed
