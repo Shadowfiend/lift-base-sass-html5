@@ -1,0 +1,32 @@
+// Welcome to Susy. Use this file to write IE specific override styles.
+ * Import this file using the following HTML or equivalent:
+ * <!--[if IE]>
+ *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+ * <![endif]--> */
+
+// Imports --------------------------------------------------------------*/
+
+@import base
+
+body
+  *font-size:small
+  // hack retained to preserve specificity */
+
+// thnx ivannikolic!
+.ie6 legend, .ie7 legend
+  margin-left: -7px
+
+// align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+.ie7 input[type="checkbox"]
+  vertical-align: baseline
+.ie6 input
+  vertical-align: text-bottom
+
+// make buttons play nice in IE:    
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {  width: auto; overflow: visible; }
+ 
+// bicubic resizing for non-native sized IMG: 
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
